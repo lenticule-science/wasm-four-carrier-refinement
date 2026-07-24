@@ -1,0 +1,28 @@
+{
+  "profile": "org.emsenn.evm.sovereign-enterprise-account.v3",
+  "enterprise": {
+    "nodeId": "wasm-four-carrier-refinement",
+    "urn": "urn:ame:wasm-four-carrier-refinement",
+    "enterpriseId": "0xc7eec7b32ab4985cb75d72596df048d707ddb347d6a1784120f24f15344ed039"
+  },
+  "chain": {
+    "chainId": 31337,
+    "caip2": "eip155:31337"
+  },
+  "account": {
+    "address": "0x685c8eb6d6fd9354bc1f281de76d60c51ba280db",
+    "caip10": "eip155:31337:0x685c8eb6d6fd9354bc1f281de76d60c51ba280db"
+  },
+  "factory": {
+    "address": "0x7bf3cf1176c4a037d3ea2a5ff3d480359ac65ecd",
+    "userSalt": "0xbffd8e2ba6841748fdcabc342ce21646ae5bb5ac30ec5bee301ea1c4ebad5a57"
+  },
+  "policy": {
+    "signer": "0x8e1e0c660523e964fcd562923ceca3075e416b49",
+    "custody": "settlement-private"
+  },
+  "deployment": {
+    "transaction": "0x7e8231d0b1ec98aabb75a082045ea93c292a59ca1c890ac9e0b41741e11de04a",
+    "block": 1498
+  }
+}
