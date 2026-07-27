@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { Message, Role } from "@a2a-js/sdk";
-import { a2aResultParts, sendRmnTask } from "@emsenn/a2a-rmn-task-client-service";
-import { extractRmnPart, rmnPart } from "@emsenn/a2a-rmn-part-service";
-import { checkTerm, decodeSemantic, semanticBytes, semanticId } from "@emsenn/rmn-semantic-conformance";
-import { circuitInterfaceFromAgentCard, SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION } from "@emsenn/rmn-semantic-conformance/hierarchical-circuit";
-import { decodeCarrierRefinementReceipt } from "@emsenn/rmn-semantic-conformance/carrier-refinement";
+import { a2aResultParts, sendRmnTask } from "@red-cup-engineering/a2a-rmn-task-client-service";
+import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service";
+import { checkTerm, decodeSemantic, semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { circuitInterfaceFromAgentCard, SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
+import { decodeCarrierRefinementReceipt } from "@red-cup-engineering/rmn-semantic-conformance/carrier-refinement";
 import { encodeWasmFourRefinementRequest } from "./refinement-assay.mjs";
 
 const responseParts = a2aResultParts;

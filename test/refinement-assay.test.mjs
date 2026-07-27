@@ -3,9 +3,9 @@ import test from "node:test";
 import { chmod, lstat, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { observeInfomaterial } from "@emsenn/infomaterial-observation";
-import { semanticId } from "@emsenn/rmn-semantic-conformance";
-import { HIERARCHICAL_CIRCUIT_PROFILE } from "@emsenn/rmn-semantic-conformance/hierarchical-circuit";
+import { observeInfomaterial } from "@lenticule-science/infomaterial-observation";
+import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { HIERARCHICAL_CIRCUIT_PROFILE } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
 import { assayWasmFourCarrierRefinement, WASM_FOUR_CARRIER_PROFILE } from "../src/refinement-assay.mjs";
 
 const IDENTITY_WASM = Buffer.from("AGFzbQEAAAABBwFgAn9/AX8DAwIAAAcnAhBwb3NpdGl2ZUV2aWRlbmNlAAAQbmVnYXRpdmVFdmlkZW5jZQABCgsCBAAgAAsEACABCw==", "base64");

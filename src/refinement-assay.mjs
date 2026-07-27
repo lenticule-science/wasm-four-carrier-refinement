@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { regularFileMaterial } from "@emsenn/infomaterial-observation";
-import { validateInfomaterialObservationReceipt } from "@emsenn/infomaterial-observation/receipt";
-import { semanticBytes, semanticId } from "@emsenn/rmn-semantic-conformance";
-import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@emsenn/rmn-semantic-conformance/carrier-refinement";
-import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@emsenn/rmn-semantic-conformance/hierarchical-circuit";
-import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@emsenn/rmn-semantic-conformance/relational-value";
+import { regularFileMaterial } from "@lenticule-science/infomaterial-observation";
+import { validateInfomaterialObservationReceipt } from "@lenticule-science/infomaterial-observation/receipt";
+import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@red-cup-engineering/rmn-semantic-conformance/carrier-refinement";
+import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
+import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
 
 export const WASM_FOUR_CARRIER_PROFILE = "org.emsenn.infomaterial.wasm-four-carrier.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0x685c8eb6d6fd9354bc1f281de76d60c51ba280db";

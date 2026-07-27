@@ -1,7 +1,7 @@
 [Unit]
 Description=WebAssembly FOUR carrier refinement A2A provider
-After=network-online.target rwil-rdf-services.service
-Wants=network-online.target rwil-rdf-services.service
+After=network-online.target rwil-rdf-projection-service.service
+Wants=network-online.target rwil-rdf-projection-service.service
 
 [Service]
 Type=simple
