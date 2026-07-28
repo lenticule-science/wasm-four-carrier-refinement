@@ -19,7 +19,7 @@ function fail(code, message) { const error = new Error(message); error.code = co
 function exactKeys(value, keys) { return value && Object.getPrototypeOf(value) === Object.prototype && Object.keys(value).sort().join("\0") === [...keys].sort().join("\0"); }
 function caip10(value, field) { if (typeof value !== "string" || !CAIP10.test(value)) fail("malformed-refinement", `${field} must be a chain-qualified EVM account`); return value; }
 function typed(value) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { bytes: semanticBytes(term), id: semanticId(term), term }; }
-function rawNi(bytes) { return `ni:///sha-256;${createHash("sha256").update(bytes).digest("base64url")}`; }
+const rawNi = (await import(new URL("../../rmn-semantic-conformance-die/src/canonical-cbor.mjs", import.meta.url).href)).rawNiUri;
 
 function decodeCarrier(source) {
   if (!exactKeys(source, ["bytesBase64", "mode", "profile"]) || source.profile !== WASM_FOUR_CARRIER_PROFILE) fail("malformed-carrier", "carrier must use the exact WebAssembly FOUR profile");
