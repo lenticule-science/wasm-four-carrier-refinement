@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { observeInfomaterial } from "@lenticule-science/infomaterial-observation";
 import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
 import { HIERARCHICAL_CIRCUIT_PROFILE } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
-import { assayWasmFourCarrierRefinement, WASM_FOUR_CARRIER_PROFILE } from "../src/refinement-assay.mjs";
+import { assayWasmFourCarrierRefinement, PROVIDER_ACCOUNT, WASM_FOUR_CARRIER_PROFILE } from "../src/refinement-assay.mjs";
 
 const IDENTITY_WASM = Buffer.from("AGFzbQEAAAABBwFgAn9/AX8DAwIAAAcnAhBwb3NpdGl2ZUV2aWRlbmNlAAAQbmVnYXRpdmVFdmlkZW5jZQABCgsCBAAgAAsEACABCw==", "base64");
 const IMPORT_WASM = Buffer.from([0,97,115,109,1,0,0,0,1,4,1,96,0,0,2,7,1,1,120,1,102,0,0]);
@@ -43,6 +43,15 @@ test("exact no-import WebAssembly material mechanically refines the complete FOU
   assert.equal(result.receipt.proof, result.proofSemanticId);
   assert.equal(result.receipt.materialRoot, value.materialObservation.materialRoot);
   assert.match(result.semanticId, /^ni:\/\/\/sha-256;/u);
+});
+
+test("the carrier producer may run the same exact replayable refinement assay", async () => {
+  const value = await fixture(), input = request(value); input.producer = PROVIDER_ACCOUNT;
+  const result = await assayWasmFourCarrierRefinement(input);
+  assert.equal(result.receipt.provider, PROVIDER_ACCOUNT);
+  assert.equal(result.receipt.producer, PROVIDER_ACCOUNT);
+  assert.equal(result.receipt.equivalent, true);
+  assert.equal(result.proof.vectors.every(({ matched }) => matched), true);
 });
 
 test("changed bytes cannot inhabit an earlier material observation", async () => {

@@ -99,7 +99,6 @@ function normalizeRequest(source) {
   const component = normalizeHierarchicalCircuit(source.component);
   if (component.instances.length !== 0 || component.nets.length !== 0 || component.ports.filter(({ direction }) => direction === "input").length !== 1 || component.ports.filter(({ direction }) => direction === "output").length !== 1 || component.behavior.factors.length !== 1) fail("unsupported-component", "the first WebAssembly proof profile requires one irreducible leaf factor with one input and one output");
   const producer = caip10(source.producer, "producer");
-  if (producer === PROVIDER_ACCOUNT) fail("self-assay-refused", "the refinement provider cannot assay its own carrier");
   const materialObservation = validateInfomaterialObservationReceipt(source.materialObservation);
   if (materialObservation.rootKind !== "file") fail("unsupported-material", "the WebAssembly carrier must be one observed regular file");
   return { kind: source.kind, producer, component, materialObservation: source.materialObservation, carrier: decodeCarrier(source.carrier) };

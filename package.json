@@ -25,49 +25,7 @@
     "@red-cup-engineering/a2a-rmn-part-service": "1.0.0",
     "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.0",
     "@lenticule-science/infomaterial-observation": "2.0.0",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.0",
+    "@red-cup-engineering/rmn-semantic-conformance": "6.0.1",
     "@lenticule-science/rwil-rdf-projection-service": "1.0.2"
-  },
-  "x-agentic-metro-enterprise": {
-    "node-id": "wasm-four-carrier-refinement",
-    "actor": "urn:ame:wasm-four-carrier-refinement",
-    "organizational-kind": "micro-enterprise",
-    "owners": [
-      "obsmetrological-services-section"
-    ],
-    "membrane": {
-      "law": "lib/",
-      "lasting-instances": "content/",
-      "append-only-instances": "data/"
-    },
-    "admission": "one exact M1 leaf, producer smart account, canonical regular-file observation, and bounded no-import WebAssembly carrier",
-    "refusal": "self-assay, material drift, non-file material, composite or wrong-arity component, imports, start section, ABI drift, partial vectors, behavior mismatch, customer mutation, label-only placement, or fallback profile",
-    "operation-catalog": {
-      "serve-wasm-four-carrier-refinement-a2a": {
-        "contract": "ni:///sha-256;xVUs2-N5MiZmWFiIw7KT0mWXu7er3kzN0Rs8RCO4PAk",
-        "protocol": "A2A 1.0",
-        "accepts": "application/rmn+cbor WasmFourCarrierRefinementAssayRequest",
-        "returns": "application/rmn+cbor CircuitCarrierRefinementReceipt|standard A2A refusal",
-        "legacyCompatibility": false
-      }
-    }
-  },
-  "x-semiotic-voxel": {
-    "profile": "org.harmonious-union.semiotic-voxel.v1",
-    "owner": "lenticule-science",
-    "kind": "actor",
-    "actor": "urn:ame:wasm-four-carrier-refinement",
-    "operations": [
-      "serve-wasm-four-carrier-refinement-a2a"
-    ],
-    "capabilities": [
-      {
-        "capability": "wasm-four-carrier-refinement",
-        "faces": [
-          "serve-wasm-four-carrier-refinement-a2a"
-        ]
-      }
-    ],
-    "package": "@lenticule-science/wasm-four-carrier-refinement"
   }
 }
