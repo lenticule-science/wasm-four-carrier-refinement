@@ -7,19 +7,19 @@ import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-con
 import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@red-cup-engineering/rmn-semantic-conformance/carrier-refinement";
 import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
 import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
+import { rawNiUri as rawNi } from "@red-cup-engineering/rmn-semantic-conformance/canonical-cbor";
 
 export const WASM_FOUR_CARRIER_PROFILE = "org.emsenn.infomaterial.wasm-four-carrier.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0x685c8eb6d6fd9354bc1f281de76d60c51ba280db";
 const MAXIMUM_BYTES = 1_048_576;
 const CAIP10 = /^eip155:[1-9][0-9]*:0x[0-9a-f]{40}$/u;
-const RUNNER = fileURLToPath(new URL("../bin/run-wasm-four.mjs", import.meta.url));
+const RUNNER = fileURLToPath(new URL("../scripts/run-wasm-four.mjs", import.meta.url));
 const EXPORTS = Object.freeze(["negativeEvidence", "positiveEvidence"]);
 
 function fail(code, message) { const error = new Error(message); error.code = code; throw error; }
 function exactKeys(value, keys) { return value && Object.getPrototypeOf(value) === Object.prototype && Object.keys(value).sort().join("\0") === [...keys].sort().join("\0"); }
 function caip10(value, field) { if (typeof value !== "string" || !CAIP10.test(value)) fail("malformed-refinement", `${field} must be a chain-qualified EVM account`); return value; }
 function typed(value) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { bytes: semanticBytes(term), id: semanticId(term), term }; }
-const rawNi = (await import(new URL("../../rmn-semantic-conformance-die/src/canonical-cbor.mjs", import.meta.url).href)).rawNiUri;
 
 function decodeCarrier(source) {
   if (!exactKeys(source, ["bytesBase64", "mode", "profile"]) || source.profile !== WASM_FOUR_CARRIER_PROFILE) fail("malformed-carrier", "carrier must use the exact WebAssembly FOUR profile");
