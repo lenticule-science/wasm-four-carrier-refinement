@@ -1,6 +1,6 @@
 {
   "name": "@lenticule-science/wasm-four-carrier-refinement",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "Independent no-import WebAssembly refinement assay for one-input/one-output FOUR circuit leaves.",
@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@a2a-js/sdk": "1.0.0-beta.0",
-    "@red-cup-engineering/a2a-contracted-agent-service": "2.0.4",
-    "@red-cup-engineering/a2a-rmn-part-service": "1.0.0",
-    "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.0",
-    "@lenticule-science/infomaterial-observation": "2.0.0",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.1",
-    "@lenticule-science/witness-journal-rdf-projection-service": "1.0.2"
+    "@red-cup-engineering/a2a-contracted-agent-service": "2.0.5",
+    "@red-cup-engineering/a2a-rmn-part-service": "1.0.1",
+    "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.1",
+    "@lenticule-science/infomaterial-observation": "2.0.1",
+    "@red-cup-engineering/rmn-semantic-conformance": "6.0.2",
+    "@lenticule-science/witness-journal-rdf-projection-service": "1.0.3"
   }
 }
