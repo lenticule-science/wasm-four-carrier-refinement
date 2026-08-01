@@ -8,7 +8,6 @@ import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-servi
 import { checkTerm, decodeSemantic, semanticBytes } from "@red-cup-engineering/rmn-semantic-conformance";
 import { createSettlementStore } from "@lenticule-science/witness-journal-rdf-projection-service/client";
 import { assayWasmFourCarrierRefinement, decodeWasmFourRefinementRequest } from "../src/refinement-assay.mjs";
-import { WASM_FOUR_REFINEMENT_LAW } from "../src/law.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -23,8 +22,8 @@ export async function executeA2aMessage(source, env = process.env) {
   const result = await assayWasmFourCarrierRefinement(request);
   const recordedAt = new Date().toISOString();
   const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: env.WITNESS_JOURNAL_RDF_AGENT });
-  await store.record({ category: "wasm-four-carrier-refinement.proof", recordedAt, record: { ...result.proof, semanticId: result.proofSemanticId, law: WASM_FOUR_REFINEMENT_LAW.id } });
-  await store.record({ category: "wasm-four-carrier-refinement.receipt", recordedAt, record: { ...result.receipt, semanticId: result.semanticId, law: WASM_FOUR_REFINEMENT_LAW.id } });
+  await store.record({ category: "wasm-four-carrier-refinement.proof", recordedAt, record: { ...result.proof, semanticId: result.proofSemanticId } });
+  await store.record({ category: "wasm-four-carrier-refinement.receipt", recordedAt, record: { ...result.receipt, semanticId: result.semanticId } });
   return Message.toJSON({ messageId: randomUUID(), contextId: message.contextId, taskId: message.taskId, role: Role.ROLE_AGENT, parts: [rmnPart(result.canonicalBytes, "carrier-refinement-receipt.rmn.cbor")], metadata: { disposition: "conformant", receiptNi: result.semanticId, componentNi: result.receipt.component, materialRootNi: result.receipt.materialRoot, profile: result.receipt.profile }, extensions: [], referenceTaskIds: [] });
 }
 

@@ -1,9 +1,0 @@
-#lang rmn/v2
-(map
-  ("type" "WasmFourCarrierRefinementLaw")
-  ("version" 1)
-  ("provider" "urn:ame:wasm-four-carrier-refinement")
-  ("precondition" "The customer supplies one exact placement-neutral M1 leaf with one FOUR input and one FOUR output, one independently observed regular-file material receipt, one exact file mode, one bounded canonical-base64 WebAssembly carrier, and the producer's chain-qualified smart-account identity.")
-  ("operation" "Recompute the carrier's infomaterial root and require equality with the observation; validate the WebAssembly module; require zero imports and exactly positiveEvidence and negativeEvidence exports of type (i32,i32)->i32; execute all four explicit FOUR input pairs in a time-bounded fresh process; compare every returned output bit with the exact component behavior; and append the canonical result through the hired witness-journal RDF provider.")
-  ("postcondition" "Return one canonical RMN refinement receipt binding the exact component, behavior, carrier bytes, material root, observation, proof profile, complete vector result, provider smart account, and successful equivalence without mutating customer material.")
-  ("refusal" "Refuse unattributed or assay evidence; malformed, oversized, drifting, or non-file material; a composite or wrong-arity component; a malformed WebAssembly module; imports, start section, extra or wrongly typed exports, timeout, trap, non-bit result, missing vector, behavior mismatch, unavailable witness journal provider, customer mutation, or any legacy function-label placement. Producer identity neither proves nor disproves correctness."))
