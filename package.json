@@ -6,7 +6,8 @@
   "description": "Independent no-import WebAssembly refinement assay for one-input/one-output FOUR circuit leaves.",
   "exports": {
     ".": "./src/refinement-assay.mjs",
-    "./client": "./src/client.mjs"
+    "./client": "./src/client.mjs",
+    "./package.json": "./package.json"
   },
   "bin": {
     "serve-wasm-four-carrier-refinement-a2a": "./scripts/server.mjs"
@@ -25,7 +26,7 @@
     "@red-cup-engineering/a2a-rmn-part-service": "1.0.1",
     "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.1",
     "@lenticule-science/infomaterial-observation": "2.0.1",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.2",
-    "@lenticule-science/witness-journal-rdf-projection-service": "1.0.3"
+    "@red-cup-engineering/relation-model-notation-runtime": "7.0.0",
+    "@red-cup-engineering/witness-journal-rdf-projection-service": "1.1.0"
   }
 }

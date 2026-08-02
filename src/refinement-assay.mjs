@@ -3,11 +3,11 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { regularFileMaterial } from "@lenticule-science/infomaterial-observation";
 import { validateInfomaterialObservationReceipt } from "@lenticule-science/infomaterial-observation/receipt";
-import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
-import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@red-cup-engineering/rmn-semantic-conformance/carrier-refinement";
-import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
-import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
-import { rawNiUri as rawNi } from "@red-cup-engineering/rmn-semantic-conformance/canonical-cbor";
+import { semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@red-cup-engineering/relation-model-notation-runtime/carrier-refinement";
+import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
+import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
+import { rawNiUri as rawNi } from "@red-cup-engineering/relation-model-notation-runtime/canonical-cbor";
 
 export const WASM_FOUR_CARRIER_PROFILE = "org.emsenn.infomaterial.wasm-four-carrier.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0x685c8eb6d6fd9354bc1f281de76d60c51ba280db";

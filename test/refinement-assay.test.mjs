@@ -4,8 +4,8 @@ import { chmod, lstat, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { observeInfomaterial } from "@lenticule-science/infomaterial-observation";
-import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
-import { HIERARCHICAL_CIRCUIT_PROFILE } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
+import { semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { HIERARCHICAL_CIRCUIT_PROFILE } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { assayWasmFourCarrierRefinement, PROVIDER_ACCOUNT, WASM_FOUR_CARRIER_PROFILE } from "../src/refinement-assay.mjs";
 
 const IDENTITY_WASM = Buffer.from("AGFzbQEAAAABBwFgAn9/AX8DAwIAAAcnAhBwb3NpdGl2ZUV2aWRlbmNlAAAQbmVnYXRpdmVFdmlkZW5jZQABCgsCBAAgAAsEACABCw==", "base64");
