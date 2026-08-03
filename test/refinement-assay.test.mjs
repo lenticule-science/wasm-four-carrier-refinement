@@ -4,14 +4,14 @@ import { chmod, lstat, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { observeInfomaterial } from "@lenticule-science/infomaterial-observation";
-import { semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { jsonId } from "../src/semantic-identity.mjs";
 import { HIERARCHICAL_CIRCUIT_PROFILE } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { assayWasmFourCarrierRefinement, PROVIDER_ACCOUNT, WASM_FOUR_CARRIER_PROFILE } from "../src/refinement-assay.mjs";
 
 const IDENTITY_WASM = Buffer.from("AGFzbQEAAAABBwFgAn9/AX8DAwIAAAcnAhBwb3NpdGl2ZUV2aWRlbmNlAAAQbmVnYXRpdmVFdmlkZW5jZQABCgsCBAAgAAsEACABCw==", "base64");
 const IMPORT_WASM = Buffer.from([0,97,115,109,1,0,0,0,1,4,1,96,0,0,2,7,1,1,120,1,102,0,0]);
 const FOUR = [[false, false], [true, false], [false, true], [true, true]].map(([positiveEvidence, negativeEvidence]) => ({ positiveEvidence, negativeEvidence }));
-const id = (label) => semanticId(["constant", ["base", "Text"], label]);
+const id = (label) => jsonId(["constant", ["base", "Text"], label], "lenticule.carrier-refinement.test-text-constant");
 const component = (outputs = FOUR) => ({
   profile: HIERARCHICAL_CIRCUIT_PROFILE,
   law: id("identity wasm die law"),

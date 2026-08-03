@@ -2,10 +2,11 @@ import { randomUUID } from "node:crypto";
 import { Message, Role } from "@a2a-js/sdk";
 import { a2aResultParts, sendRmnTask } from "@red-cup-engineering/a2a-rmn-task-client-service";
 import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service";
-import { checkTerm, decodeSemantic, semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { checkTerm, decodeSemantic, semanticBytes } from "@red-cup-engineering/relation-model-notation-runtime";
 import { circuitInterfaceFromAgentCard, SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { decodeCarrierRefinementReceipt } from "@red-cup-engineering/relation-model-notation-runtime/carrier-refinement";
 import { encodeWasmFourRefinementRequest } from "./refinement-assay.mjs";
+import { jsonId } from "./semantic-identity.mjs";
 
 const responseParts = a2aResultParts;
 
@@ -20,5 +21,5 @@ export async function assayWasmFourCarrier({ agentUrl, producer, component, mate
   const receipt = decodeCarrierRefinementReceipt(response[1], response[2]);
   const provider = circuitInterfaceFromAgentCard(exchange.agentCard);
   if (receipt.provider !== provider.account) throw new Error("refinement receipt provider does not own the signed Agent Card");
-  return { receipt, receiptNi: semanticId(response), response, exchange };
+  return { receipt, receiptNi: jsonId(response, "lenticule.carrier-refinement.receipt"), response, exchange };
 }

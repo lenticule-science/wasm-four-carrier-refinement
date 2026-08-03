@@ -3,11 +3,11 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { regularFileMaterial } from "@lenticule-science/infomaterial-observation";
 import { validateInfomaterialObservationReceipt } from "@lenticule-science/infomaterial-observation/receipt";
-import { semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { semanticBytes } from "@red-cup-engineering/relation-model-notation-runtime";
 import { CARRIER_REFINEMENT_PROFILE, normalizeCarrierRefinementReceipt } from "@red-cup-engineering/relation-model-notation-runtime/carrier-refinement";
 import { hierarchicalCircuitId, normalizeHierarchicalCircuit } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
-import { rawNiUri as rawNi } from "@red-cup-engineering/relation-model-notation-runtime/canonical-cbor";
+import { byteCarrierId, jsonId } from "./semantic-identity.mjs";
 
 export const WASM_FOUR_CARRIER_PROFILE = "org.emsenn.infomaterial.wasm-four-carrier.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0x685c8eb6d6fd9354bc1f281de76d60c51ba280db";
@@ -19,7 +19,7 @@ const EXPORTS = Object.freeze(["negativeEvidence", "positiveEvidence"]);
 function fail(code, message) { const error = new Error(message); error.code = code; throw error; }
 function exactKeys(value, keys) { return value && Object.getPrototypeOf(value) === Object.prototype && Object.keys(value).sort().join("\0") === [...keys].sort().join("\0"); }
 function caip10(value, field) { if (typeof value !== "string" || !CAIP10.test(value)) fail("malformed-refinement", `${field} must be a chain-qualified EVM account`); return value; }
-function typed(value) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { bytes: semanticBytes(term), id: semanticId(term), term }; }
+function typed(value, objectKind) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { bytes: semanticBytes(term), id: jsonId(term, objectKind), term }; }
 
 function decodeCarrier(source) {
   if (!exactKeys(source, ["bytesBase64", "mode", "profile"]) || source.profile !== WASM_FOUR_CARRIER_PROFILE) fail("malformed-carrier", "carrier must use the exact WebAssembly FOUR profile");
@@ -143,8 +143,8 @@ export async function assayWasmFourCarrierRefinement(source, options = {}) {
     return { input, expected, observed, matched: true };
   });
   if (new Set(vectors.map(({ input }) => JSON.stringify(input))).size !== 4) fail("incomplete-vectors", "carrier repeated or omitted a FOUR input");
-  const proof = { kind: "WasmFourCarrierRefinementProof", profile: WASM_FOUR_CARRIER_PROFILE, imports: abi.imports, abi: { exports: abi.exports, parameters: ["positiveEvidence", "negativeEvidence"], results: ["positiveEvidence", "negativeEvidence"] }, vectorCount: 4, vectorSet: typed(vectors).id, vectors };
-  const proofDocument = typed(proof), behavior = typed(request.component.behavior).id;
-  const receipt = normalizeCarrierRefinementReceipt({ kind: "CircuitCarrierRefinementReceipt", profile: CARRIER_REFINEMENT_PROFILE, proofProfile: WASM_FOUR_CARRIER_PROFILE, provider: PROVIDER_ACCOUNT, producer: request.producer, component: componentId, behavior, carrier: rawNi(carrier.bytes), materialRoot: material.materialRoot, observation: request.materialObservation.semanticId, proof: proofDocument.id, equivalent: true, customerMaterialMutated: false });
-  const document = typed(receipt); return { receipt, proof, proofSemanticId: proofDocument.id, proofCanonicalBytes: proofDocument.bytes, semanticId: document.id, canonicalBytes: document.bytes };
+  const proof = { kind: "WasmFourCarrierRefinementProof", profile: WASM_FOUR_CARRIER_PROFILE, imports: abi.imports, abi: { exports: abi.exports, parameters: ["positiveEvidence", "negativeEvidence"], results: ["positiveEvidence", "negativeEvidence"] }, vectorCount: 4, vectorSet: typed(vectors, "lenticule.carrier-refinement.wasm-four-vector-set").id, vectors };
+  const proofDocument = typed(proof, "lenticule.carrier-refinement.wasm-four-proof"), behavior = typed(request.component.behavior, "lenticule.carrier-refinement.circuit-behavior").id;
+  const receipt = normalizeCarrierRefinementReceipt({ kind: "CircuitCarrierRefinementReceipt", profile: CARRIER_REFINEMENT_PROFILE, proofProfile: WASM_FOUR_CARRIER_PROFILE, provider: PROVIDER_ACCOUNT, producer: request.producer, component: componentId, behavior, carrier: byteCarrierId(carrier.bytes, "lenticule.carrier-refinement.wasm-module", "application/wasm"), materialRoot: material.materialRoot, observation: request.materialObservation.semanticId, proof: proofDocument.id, equivalent: true, customerMaterialMutated: false });
+  const document = typed(receipt, "lenticule.carrier-refinement.receipt"); return { receipt, proof, proofSemanticId: proofDocument.id, proofCanonicalBytes: proofDocument.bytes, semanticId: document.id, canonicalBytes: document.bytes };
 }
